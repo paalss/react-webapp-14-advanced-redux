@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const initialCartVisibility = {visibility: false};
+const initialCartVisibility = { visibility: true };
 
 const cartSlice = createSlice({
   name: "cart",
@@ -12,10 +12,39 @@ const cartSlice = createSlice({
   },
 });
 
-const store = configureStore({
-  reducer: { cart: cartSlice.reducer },
+const initialCartState = {
+  items: [
+    {
+      title: "test",
+      quantity: 3,
+      price: 6,
+      total: 18,
+    },
+    {
+      title: "test2",
+      quantity: 1,
+      price: 7,
+      total: 7,
+    },
+  ],
+};
+
+const cartItemsSlice = createSlice({
+  name: "cartItems",
+  initialState: initialCartState,
+  reducers: {
+    increase() {},
+    decrease() {},
+    add() {},
+    remove() {},
+  },
 });
 
-export const cartActions = cartSlice.actions;
+const store = configureStore({
+  reducer: { cart: cartSlice.reducer, cartItems: cartItemsSlice.reducer },
+});
+
+export const cartVisibilityActions = cartSlice.actions;
+export const cartItemsActions = cartSlice.actions;
 
 export default store;
