@@ -33,10 +33,12 @@ const cartItemsSlice = createSlice({
   name: "cartItems",
   initialState: initialCartState,
   reducers: {
-    increase() {},
-    decrease() {},
-    add() {},
-    remove() {},
+    increase(state) {
+      console.log('state: ', state)
+    },
+    decrease(state) {
+
+    },
   },
 });
 

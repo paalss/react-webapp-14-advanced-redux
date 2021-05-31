@@ -5,7 +5,7 @@ import CartItem from "./CartItem";
 
 const Cart = (props) => {
   const items = useSelector((state) => state.cartItems.items);
-  console.log("items: ", items);
+  // console.log("items: ", items);
 
   const cartItems = items.map((e) => {
     return (
