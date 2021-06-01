@@ -1,5 +1,7 @@
 # react-webapp-14-advanced-redux
 
+![app](src/assets/app.png)
+
 Som alltid:
 ```
 npm install

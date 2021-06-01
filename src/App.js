@@ -5,7 +5,8 @@ import Products from "./components/Shop/Products";
 import { useSelector } from "react-redux";
 
 function App() {
-  const isCartVisible = useSelector((state) => state.cart.visibility);
+  //> ved å passe ned state til useSelector får den automatisk tilgang på siste state
+  const isCartVisible = useSelector((state) => state.ui.isCartVisible);
   return (
     <Layout>
       {isCartVisible && <Cart />}
