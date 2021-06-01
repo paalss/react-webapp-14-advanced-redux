@@ -9,7 +9,8 @@ const cartSlice = createSlice({
   reducers: {
     //> bruke action for å hente opp parameter
     addItem(state, action) {
-      // console.log(current(state.items))
+      // console.log(current(state))
+      console.log(action)
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++
