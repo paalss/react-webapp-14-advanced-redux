@@ -3,10 +3,8 @@ import { uiActions } from "../../store/ui-slice";
 import classes from "./CartButton.module.css";
 
 const CartButton = (props) => {
-  //> cart fordi i index js heter key cart
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
   const dispatch = useDispatch();
-  // dispatch action fra action creator
   const toggleCartHandler = () => {
     dispatch(uiActions.toggle());
   };

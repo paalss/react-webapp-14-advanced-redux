@@ -7,16 +7,14 @@ const cartSlice = createSlice({
     totalQuantity: 0,
   },
   reducers: {
-    //> bruke action for å hente opp parameter
     addItem(state, action) {
       // console.log(current(state))
       console.log(action)
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++
-      //> husk ikke muter state uten redux toolkit. Redux toolkit forhindrer at det faktisk manipuleres
       if (!existingItem) {
-        // hvis element ikke eksiterer i cart, legg til
+        // hvis element ikke eksiterer i cart, legg til nytt element
         state.items.push({
           id: newItem.id,
           title: newItem.title,
@@ -25,11 +23,10 @@ const cartSlice = createSlice({
           totalPrice: newItem.price,
         });
       } else {
-        // hvis element finnes i cart, øk kvantiteten
+        // hvis element finnes i cart, øk kvantiteten/telleren
         existingItem.quantity++;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
       }
-      // console.log("current(state): ", current(state));
     },
     removeItem(state, action) {
       const id = action.payload;
