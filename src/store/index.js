@@ -17,16 +17,11 @@ const cartVisibilitySlice = createSlice({
 const initialCartItems = {
   items: [
     {
+      id: "p1",
       title: "test",
       quantity: 3,
       price: 6,
       total: 18,
-    },
-    {
-      title: "test2",
-      quantity: 1,
-      price: 7,
-      total: 7,
     },
   ],
 };
@@ -36,14 +31,22 @@ const cartItemsSlice = createSlice({
   initialState: initialCartItems,
   reducers: {
     increase(state, action) {
-      // console.log("state: ", current(state.items));
+      console.log("state: ", current(state.items));
       // console.log("action.payload: ", action.payload);
-      state.items.push({
-        title: action.payload.title,
-        price: action.payload.price,
-        description: action.payload.description,
-        total: 0,
-      });
+      const newItemId = action.payload.id;
+      const existingItem = state.items.find((x) => x.id === newItemId);
+      if (existingItem) {
+        if (newItemId === existingItem.id) {
+          console.log(true);
+        }
+      } else {
+        state.items.push({
+          title: action.payload.title,
+          price: action.payload.price,
+          description: action.payload.description,
+          total: 0,
+        });
+      }
     },
     decrease(state) {},
   },
