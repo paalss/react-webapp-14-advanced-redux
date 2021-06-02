@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { cartItemsActions } from "../../store";
+import { cartItemsActions } from "../../store/index";
 import Card from "../UI/Card";
 import classes from "./ProductItem.module.css";
 
@@ -8,7 +8,7 @@ const ProductItem = (props) => {
   const dispatch = useDispatch();
 
   const increaseHandler = () => {
-    dispatch(cartItemsActions.increase(title));
+    dispatch(cartItemsActions.increase({ title, price, description }));
   };
 
   return (

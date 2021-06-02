@@ -1,8 +1,9 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSlice, current } from "@reduxjs/toolkit";
 
+// cart visiblility
 const initialCartVisibility = { visibility: true };
 
-const cartSlice = createSlice({
+const cartVisibilitySlice = createSlice({
   name: "cart",
   initialState: initialCartVisibility,
   reducers: {
@@ -12,7 +13,8 @@ const cartSlice = createSlice({
   },
 });
 
-const initialCartState = {
+// cart items
+const initialCartItems = {
   items: [
     {
       title: "test",
@@ -31,22 +33,30 @@ const initialCartState = {
 
 const cartItemsSlice = createSlice({
   name: "cartItems",
-  initialState: initialCartState,
+  initialState: initialCartItems,
   reducers: {
-    increase(state) {
-      console.log('state: ', state)
+    increase(state, action) {
+      // console.log("state: ", current(state.items));
+      // console.log("action.payload: ", action.payload);
+      state.items.push({
+        title: action.payload.title,
+        price: action.payload.price,
+        description: action.payload.description,
+        total: 0,
+      });
     },
-    decrease(state) {
-
-    },
+    decrease(state) {},
   },
 });
 
 const store = configureStore({
-  reducer: { cart: cartSlice.reducer, cartItems: cartItemsSlice.reducer },
+  reducer: {
+    cart: cartVisibilitySlice.reducer,
+    cartItems: cartItemsSlice.reducer,
+  },
 });
 
-export const cartVisibilityActions = cartSlice.actions;
-export const cartItemsActions = cartSlice.actions;
+export const cartVisibilityActions = cartVisibilitySlice.actions;
+export const cartItemsActions = cartItemsSlice.actions;
 
 export default store;

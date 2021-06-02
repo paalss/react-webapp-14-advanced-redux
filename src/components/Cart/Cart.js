@@ -10,7 +10,7 @@ const Cart = (props) => {
   const cartItems = items.map((e) => {
     return (
       <CartItem
-      key={e.title}
+        key={e.title}
         item={{
           title: e.title,
           quantity: e.quantity,
