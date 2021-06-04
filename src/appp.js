@@ -1,15 +1,17 @@
+import { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
+import { uiActions } from "./store/ui-slice";
 import Notification from "./components/UI/Notification";
 
-import { useDispatch, useSelector } from "react-redux";
-import { Fragment, useEffect } from "react";
-import { uiActions } from "./store/ui-slice";
+let isInitial = true;
 
 function App() {
   const dispatch = useDispatch();
-  const isCartVisible = useSelector((state) => state.ui.isCartVisible);
+  const showCart = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
 
@@ -18,12 +20,12 @@ function App() {
       dispatch(
         uiActions.showNotification({
           status: "pending",
-          title: "sending...",
-          message: "sending cart data",
+          title: "Sending...",
+          message: "Sending cart data!",
         })
       );
       const response = await fetch(
-        "https://react-http-f8322-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
+        "https://react-http-6b4a6.firebaseio.com/cart.json",
         {
           method: "PUT",
           body: JSON.stringify(cart),
@@ -31,26 +33,29 @@ function App() {
       );
 
       if (!response.ok) {
-        throw new Error("Sending failed");
+        throw new Error("Sending cart data failed.");
       }
 
       dispatch(
         uiActions.showNotification({
           status: "success",
-          title: "Success",
-          message: "Sent cart data successfully",
+          title: "Success!",
+          message: "Sent cart data successfully!",
         })
       );
     };
 
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+
     sendCartData().catch((error) => {
-      console.error("rorberbor");
-      console.error(error);
       dispatch(
         uiActions.showNotification({
           status: "error",
           title: "Error!",
-          message: "Sending data cart data failed",
+          message: "Sending cart data failed!",
         })
       );
     });
@@ -66,7 +71,7 @@ function App() {
         />
       )}
       <Layout>
-        {isCartVisible && <Cart />}
+        {showCart && <Cart />}
         <Products />
       </Layout>
     </Fragment>

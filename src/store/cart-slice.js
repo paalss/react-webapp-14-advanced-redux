@@ -9,10 +9,10 @@ const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       // console.log(current(state))
-      console.log(action)
+      console.log(action);
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
-      state.totalQuantity++
+      state.totalQuantity++;
       if (!existingItem) {
         // hvis element ikke eksiterer i cart, legg til nytt element
         state.items.push({
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
     removeItem(state, action) {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
-      state.totalQuantity--
+      state.totalQuantity--;
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== id);
       } else {
