@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useEffect } from "react";
 import { uiActions } from "./store/ui-slice";
 
+let isInitial = true;
+
 function App() {
   const dispatch = useDispatch();
   const isCartVisible = useSelector((state) => state.ui.isCartVisible);
@@ -42,6 +44,11 @@ function App() {
         })
       );
     };
+
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
 
     sendCartData().catch((error) => {
       console.error("rorberbor");
