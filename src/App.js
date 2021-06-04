@@ -45,6 +45,8 @@ function App() {
       );
     };
 
+    /* hvis kompoentet rendrer første gang, blokker at cart data blir
+    sendt til firebase */
     if (isInitial) {
       isInitial = false;
       return;
