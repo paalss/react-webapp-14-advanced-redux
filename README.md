@@ -2,7 +2,6 @@
 
 ![app](src/assets/app.png)
 
-Som alltid:
 ```
 npm install
 npm start

@@ -16,7 +16,7 @@ function App() {
   const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {
-    /* hvis kompoentet rendrer første gang, blokker at cart data blir
+    /* hvis komponentet rendrer første gang, blokker at cart data blir
     sendt til firebase */
     if (isInitial) {
       isInitial = false;
